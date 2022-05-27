@@ -1,14 +1,17 @@
-import './App.css';
+import styles from './App.module.css';
 import Nav from './Components/Nav/Nav';
+import Sidebar from './Components/Sidebar/Sidebar';
 
 function App() {
   return (
-    <div className="App">
-      <div>
+    <div className={styles.App}>
+      <div className={styles.nav}>
         <Nav />
       </div>
-      <div>
-        <div>SideBar</div>
+      <div className={styles.container}>
+        
+          <Sidebar />
+        
 
         <div>
             <div>

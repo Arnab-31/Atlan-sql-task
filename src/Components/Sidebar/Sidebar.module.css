@@ -1,0 +1,8 @@
+.sidebarContainer{
+    background-color: aliceblue;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 10%;
+    padding: 1rem;
+}
