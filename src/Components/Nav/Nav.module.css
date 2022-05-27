@@ -1,0 +1,13 @@
+.navContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 4rem;
+    padding: 10px;
+    background-color: rgb(210, 235, 255);
+}
+
+.navLogo {
+    max-height: 2rem;
+    width: 10px;
+}
