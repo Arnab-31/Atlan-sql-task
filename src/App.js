@@ -1,6 +1,7 @@
 import styles from './App.module.css';
 import Nav from './Components/Nav/Nav';
 import Sidebar from './Components/Sidebar/Sidebar';
+import Query from './Components/Query/Query';
 
 function App() {
   return (
@@ -9,13 +10,10 @@ function App() {
         <Nav />
       </div>
       <div className={styles.container}>
-        
           <Sidebar />
-        
-
         <div>
             <div>
-              Input Area
+              <Query />
             </div>
 
             <div>
