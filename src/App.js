@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './App.module.css';
 import Nav from './Components/Nav/Nav';
 import Sidebar from './Components/Sidebar/Sidebar';
@@ -10,12 +10,19 @@ import { findResult } from './findResuls';
 function App() {
 
   const [resultsColumn, setResultsColumn] = useState(null);
+  const  [currentDb, setCurrentDb] = useState(1);
 
   const setResults = (query) => {
     const results = findResult(query);
     setResultsColumn(results);
   }
+  let data = makeData(20);
+  useEffect(() => {
+    data = makeData(20);
+    setResultsColumn(null);
+  }, [currentDb])
 
+  
   const columns = React.useMemo(
     () => [
       {
@@ -56,15 +63,16 @@ function App() {
     []
   )
 
-  const data = React.useMemo(() => makeData(20), [])
-    
+  
+  
+
   return (
     <div className={styles.App}>
       <div className={styles.nav}>
         <Nav />
       </div>
       <div className={styles.container}>
-          <Sidebar />
+          <Sidebar currentDb = {currentDb} setCurrentDb = {setCurrentDb} />
         <div className={styles.mainContainer}>
             <div>
               <Table columns={columns} data={data} />
