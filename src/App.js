@@ -11,15 +11,20 @@ function App() {
 
   const [resultsColumn, setResultsColumn] = useState(null);
   const  [currentDb, setCurrentDb] = useState(1);
+  const [newData, setNewData] = useState([]);
+  const [originalData, setOriginalData] = useState([]);
 
   const setResults = (query) => {
     const results = findResult(query);
     setResultsColumn(results);
   }
-  let data = makeData(20);
+  let data;
   useEffect(() => {
     data = makeData(20);
+    setNewData(data);
+    setOriginalData(data);
     setResultsColumn(null);
+    console.log(data);
   }, [currentDb])
 
   
@@ -64,6 +69,32 @@ function App() {
   )
 
   
+  const [search,  setSearch] = useState('');
+  useEffect(() => {
+    if(search === ''){
+      setNewData(originalData);
+    }else{
+      console.log('searching, ', search)
+      data = newData;
+      setNewData([]);
+      let searchedResults = [];
+      if(search.length > 0){
+        originalData.forEach(element => {
+          for(const val of Object.values(element)){
+          if(String(val).includes(search)){
+            console.log("serach[i], ",element)
+            searchedResults.push(element);
+            break;
+          }}
+        });
+        setNewData(searchedResults);
+      }
+      console.log('searched results', newData);
+    }
+    //if(newData.length === 0) setNewData(data);
+
+  }, [search])
+
   
 
   return (
@@ -75,12 +106,13 @@ function App() {
           <Sidebar currentDb = {currentDb} setCurrentDb = {setCurrentDb} />
         <div className={styles.mainContainer}>
             <div>
-              <Table columns={columns} data={data} />
+              <input onChange={(e) => setSearch(e.target.value)}></input>
+              {<Table columns={columns} data={newData.length === 0 ? originalData : newData} /> }
             </div>
             <div>
               <Query runQuery = {setResults}/>
               <div className={styles.resultsContainer}>
-                   {resultsColumn && <Table columns={resultsColumn} data={data} /> }
+                   {resultsColumn &&  <Table columns={resultsColumn} data={originalData} /> }
                </div>
             </div>
         </div>

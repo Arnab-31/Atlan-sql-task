@@ -1,40 +1,16 @@
-import React from 'react'
+import { fireEvent } from '@testing-library/react';
+import React, { useState } from 'react'
 //import styled from 'styled-components'
 import { useTable } from 'react-table'
 
-// import makeData from './makeData'
 
-// const Styles = styled.div`
-//   padding: 1rem;
-
-//   table {
-//     border-spacing: 0;
-//     border: 1px solid black;
-
-//     tr {
-//       :last-child {
-//         td {
-//           border-bottom: 0;
-//         }
-//       }
-//     }
-
-//     th,
-//     td {
-//       margin: 0;
-//       padding: 0.5rem;
-//       border-bottom: 1px solid black;
-//       border-right: 1px solid black;
-
-//       :last-child {
-//         border-right: 0;
-//       }
-//     }
-//   }
-// `
-
-function Table({ columns, data }) {
+function Table({ columns, data, search = 'ab' }) {
   // Use the state and functions returned from useTable to build your UI
+
+  
+
+  
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -45,6 +21,12 @@ function Table({ columns, data }) {
     columns,
     data,
   })
+
+  // if(newData.length === 0){
+  //   console.log("No New Data")
+  //   return (<div></div>);
+  // }
+   
 
   // Render the UI for your table
   return (
@@ -70,7 +52,7 @@ function Table({ columns, data }) {
           )
         })}
       </tbody>
-    </table>
+    </table> 
   )
 }
 
