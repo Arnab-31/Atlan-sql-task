@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from './Query.module.css'
 
-function Query() {
+function Query({runQuery}) {
     const [select, setSelect] = useState();
     const [db , setDb] = useState();
     const [filter , setFilter] = useState();
@@ -40,11 +40,16 @@ function Query() {
         }
     }
 
+    const run = () => {
+        const query = `Select ${select} from ${db} where ${filter}`
+        runQuery(query);
+    }
+
     return (
         <div className={styles.queryContainer}>
             
            <div>
-                <button>Run</button>
+                <button onClick={run}>Run</button>
                 <button onClick={saveQuery}>Save Query</button>
                 <br/>
                <div className={styles.query}>

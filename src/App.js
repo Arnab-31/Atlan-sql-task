@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './App.module.css';
 import Nav from './Components/Nav/Nav';
 import Sidebar from './Components/Sidebar/Sidebar';
 import Query from './Components/Query/Query';
 import Table from './Components/Table/Table';
 import makeData from './makeData'
+import { findResult } from './findResuls';
 
 function App() {
+
+  const [resultsColumn, setResultsColumn] = useState(null);
+
+  const setResults = (query) => {
+    const results = findResult(query);
+    setResultsColumn(results);
+  }
 
   const columns = React.useMemo(
     () => [
@@ -49,8 +57,7 @@ function App() {
   )
 
   const data = React.useMemo(() => makeData(20), [])
-
-  
+    
   return (
     <div className={styles.App}>
       <div className={styles.nav}>
@@ -63,7 +70,10 @@ function App() {
               <Table columns={columns} data={data} />
             </div>
             <div>
-              <Query />
+              <Query runQuery = {setResults}/>
+              <div className={styles.resultsContainer}>
+                   {resultsColumn && <Table columns={resultsColumn} data={data} /> }
+               </div>
             </div>
         </div>
       </div>
