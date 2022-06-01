@@ -2,6 +2,89 @@
 
 .query{
     display: flex;
-    width: 50vw;
+    width: 95%;
     justify-content: space-around;
+    margin-bottom: 2rem;
+}
+
+
+.panel{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.panel p {
+    margin: 0;
+}
+
+.btn {
+    padding: 10px;
+    font-size: 15px;
+    background-color: rgb(65, 141, 255);
+    color: white;
+    border: none;
+    margin-right: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 1px;
+}
+
+.btn:hover {
+    background-color: blue;
+}
+
+
+.savedQueriesDiv {
+    display: flex;
+}
+
+.savedQueriesDiv p {
+    font-size: 1.3rem;
+    padding: 5px;
+}
+
+.savedQueriesDiv select{
+    font-size: 1rem;
+    padding: 5px;
+}
+
+.query select{
+    font-size: 1rem;
+    padding: 5px;
+}
+
+
+.query p{
+    font-size: 1.2rem;
+}
+
+
+
+@media only screen and (max-width: 1000px) {
+    .btn {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .query {
+        width: 100vw;
+    }
+
+    .panel {
+        display: block;
+    }
+
+    .query select {
+        font-size: 8px;
+    }
+
+    .query p {
+        font-size: 8px;
+    }
+
+    .savedQueriesDiv p{
+        font-size: 10px;
+    }
 }

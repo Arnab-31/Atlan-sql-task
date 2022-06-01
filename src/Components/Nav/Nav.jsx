@@ -5,7 +5,7 @@ function Nav() {
     return (
         <div className={styles.navContainer}>
             <div>
-                <img style={{height:'40px'}} src="/Atlan-logo.avif" alt = "logo" ></img>
+                <img style={{height:'40px',width:'auto'}} src="/Atlan-logo.avif" alt = "logo" ></img>
             </div>
         </div>
     )

@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import styles from './Query.module.css'
 
 function Query({runQuery}) {
-    const [select, setSelect] = useState();
-    const [db , setDb] = useState();
-    const [filter , setFilter] = useState();
-    const [savedQueries, setSavedQueries] = useState([{ select : "fcs",
-    db : "scsc",
-    filter: 'scds'}]);
+    const [select, setSelect] = useState("*");
+    const [db , setDb] = useState("Students");
+    const [filter , setFilter] = useState("profileProgress>50");
+    const [savedQueries, setSavedQueries] = useState([{ select : "*",
+    db : "Students",
+    filter: "profileProgress>50"}]);
 
     const setQuery  = (query) => {
         const values = query.split(" ");
@@ -23,7 +23,6 @@ function Query({runQuery}) {
         savedQueries.forEach((query) => {
             if(query.select === select && query.db === db && query.filter === filter) 
             {
-                console.log('true');
                 queryPresent = true;
                 return;
             }
@@ -35,8 +34,6 @@ function Query({runQuery}) {
                 db : db,
                 filter: filter
             }]);
-            console.log(savedQueries);
-            console.log(currentQueries);
         }
     }
 
@@ -49,37 +46,43 @@ function Query({runQuery}) {
         <div className={styles.queryContainer}>
             
            <div>
-                <button onClick={run}>Run</button>
-                <button onClick={saveQuery}>Save Query</button>
-                <br/>
+                <div className = {styles.panel}>
+                    <div>
+                        <button onClick={run} className={styles.btn}>Run</button>
+                        <button onClick={saveQuery} className={styles.btn}>Save Query</button>
+                    </div>
+                    <div className={styles.savedQueriesDiv}>
+                        <p>Saved Queries</p>
+                        <select onChange={(e) => setQuery(e.target.value)}>
+                        {savedQueries.map((query, idx) => (
+                            <option key={idx} >{`Select ${query.select} from ${query.db} where ${query.filter}`}</option>
+                        ))}
+                        </select>
+                    </div>
+                </div>
                <div className={styles.query}>
-                   <label for="query"></label>
+                   <label htmlFor="query"></label>
                    <p>Select</p>
                    <select onChange={(e) => setSelect(e.target.value)} value={select}>
                        <option>*</option>
-                       <option>Employees</option>
-                       <option>Salary</option>
+                       <option>FirstName,LastName</option>
+                       <option>Age</option>
+                       <option>Age,Status</option>
                    </select>
                    <p>from</p>
                    <select onChange={(e) => setDb(e.target.value)} value={db}>
-                    <option>Company</option>
-                       <option>School</option>
+                       <option>Students</option>
+                       <option>Teachers</option>
+                       <option>Staff</option>
                    </select>
                     <p>where</p>
                    <select  onChange={(e) => setFilter(e.target.value)} value={filter}>
-                       <option>salary>5000</option>
-                       <option>id=2</option>
-                       <option>department='Engineering'</option>
+                       <option>profileProgress>50</option>
+                       <option>status='Single'</option>
+                       <option>age>21</option>
+                       <option>{`visitis<50`}</option>
                    </select>
-               </div>
-
-               
-                <p>Saved Queries</p>
-                <select onChange={(e) => setQuery(e.target.value)}>
-                {savedQueries.map((query) => (
-                    <option>{`Select ${query.select} from ${query.db} where ${query.filter}`}</option>
-                ))}
-                </select>
+               </div>   
             </div>
         <div>
 

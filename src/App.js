@@ -18,16 +18,14 @@ function App() {
     const results = findResult(query);
     setResultsColumn(results);
   }
-  let data;
+  // let data;
   useEffect(() => {
-    data = makeData(20);
+    const data = makeData(20);
     setNewData(data);
     setOriginalData(data);
     setResultsColumn(null);
-    console.log(data);
   }, [currentDb])
 
-  
   const columns = React.useMemo(
     () => [
       {
@@ -74,25 +72,20 @@ function App() {
     if(search === ''){
       setNewData(originalData);
     }else{
-      console.log('searching, ', search)
-      data = newData;
+      // data = newData;
       setNewData([]);
       let searchedResults = [];
       if(search.length > 0){
         originalData.forEach(element => {
           for(const val of Object.values(element)){
           if(String(val).includes(search)){
-            console.log("serach[i], ",element)
             searchedResults.push(element);
             break;
           }}
         });
         setNewData(searchedResults);
       }
-      console.log('searched results', newData);
     }
-    //if(newData.length === 0) setNewData(data);
-
   }, [search])
 
   
@@ -105,14 +98,23 @@ function App() {
       <div className={styles.container}>
           <Sidebar currentDb = {currentDb} setCurrentDb = {setCurrentDb} />
         <div className={styles.mainContainer}>
-            <div>
-              <input onChange={(e) => setSearch(e.target.value)}></input>
+            <div className={styles.dbContainer2}>
+              <h2>Current Database</h2>
+              <div className={styles.searchContainer}>
+                <label className={styles.searchLabel} htmlFor="search">Search </label>
+                <input className={styles.searchInput} id="search" onChange={(e) => setSearch(e.target.value)}></input>
+              </div>
+             
               {<Table columns={columns} data={newData.length === 0 ? originalData : newData} /> }
             </div>
-            <div>
+            <div className={styles.mainContainer2}>
               <Query runQuery = {setResults}/>
               <div className={styles.resultsContainer}>
-                   {resultsColumn &&  <Table columns={resultsColumn} data={originalData} /> }
+                   {resultsColumn ? <Table columns={resultsColumn} data={originalData} />
+                   :
+                   <div className={styles.noResult}>
+                     <p>No results to show. Run a query to generate results.</p>
+                   </div>}
                </div>
             </div>
         </div>
