@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from './Query.module.css'
 
-function Query({runQuery}) {
+const  Query = React.memo(function Query({runQuery}){
     const [select, setSelect] = useState("*");
     const [db , setDb] = useState("Students");
     const [filter , setFilter] = useState("profileProgress>50");
@@ -89,6 +89,6 @@ function Query({runQuery}) {
     </div>
         </div>
     )
-}
+})
 
 export default Query;

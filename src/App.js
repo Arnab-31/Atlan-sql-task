@@ -10,7 +10,7 @@ import { findResult } from './findResuls';
 function App() {
 
   const [resultsColumn, setResultsColumn] = useState(null);
-  const  [currentDb, setCurrentDb] = useState(1);
+  const [currentDb, setCurrentDb] = useState(1);
   const [newData, setNewData] = useState([]);
   const [originalData, setOriginalData] = useState([]);
 
@@ -20,7 +20,7 @@ function App() {
   }
   // let data;
   useEffect(() => {
-    const data = makeData(20);
+    const data = makeData(20, currentDb);
     setNewData(data);
     setOriginalData(data);
     setResultsColumn(null);

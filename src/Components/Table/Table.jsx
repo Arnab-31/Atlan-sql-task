@@ -2,7 +2,7 @@ import React from 'react'
 import { useTable, usePagination } from 'react-table'
 
 
-function Table({ columns, data }) {
+const Table = React.memo(function Table ({ columns, data }) {
   const {
     getTableProps,
     getTableBodyProps,
@@ -102,6 +102,6 @@ function Table({ columns, data }) {
       </div>
     </>
   )
-}
+})
 
 export default Table;
